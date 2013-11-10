@@ -5,7 +5,7 @@ class Api::V1::RegistrationsController < Api::V1::ApiController
     if @fb.present?
       if(@user = User.find_by_fb_id(@fb))
         @user.ensure_authentication_token
-        return
+        render json: { success: true, auth_token: @user.authentication_token }
       else
         @user = User.new(params[:user])
         if @user.save
@@ -17,7 +17,7 @@ class Api::V1::RegistrationsController < Api::V1::ApiController
     elsif @twt.present?
       if(@user = User.find_by_fb_id(@twt) and !@fb.present)
         @user.ensure_authentication_token
-        return
+        render json: { success: true, auth_token: @user.authentication_token }
       else
         @user = User.new(params[:user])
         if @user.save

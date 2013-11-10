@@ -14,9 +14,13 @@ class Api::V1::SessionsController < Api::V1::ApiController
 
   def destroy
     @user = User.find_for_database_authentication(authentication_token: params[:user][:auth_token])
-    @user.authentication_token = nil
-    @user.save
-    render :json=> {:success=>true}
+    if @user.present?
+      @user.authentication_token = nil
+      @user.save
+      render :json=> {:success=>true}
+    else
+      render :json=> {:success=>false}
+    end
   end
 
   protected
