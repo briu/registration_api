@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   before_save :ensure_authentication_token
   after_save :take_friends
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessible :email, :password, :first_name, :last_name
   has_many :authentications
@@ -20,10 +20,5 @@ class User < ActiveRecord::Base
       token = Devise.friendly_token
       break token unless User.where(authentication_token: token).first
     end
-  end
-
-  def take_friends
-    if self.provider == "facebook"
-      user = FbGraph::User.me(@user.token).fetch
   end
 end

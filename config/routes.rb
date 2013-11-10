@@ -6,7 +6,7 @@ RegistrationApi::Application.routes.draw do
         post 'login' => 'sessions#create', :as => 'login'
         delete 'logout' => 'sessions#destroy', :as => 'logout'
       end
-      devise_for :users, controllers: {omniauth_callbacks: "authentications"}
+      match '/invite',    to: 'invites#invite'
     end
   end
 end

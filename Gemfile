@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '1.9.3'
 gem 'rails', '3.2.14'
 
 # Bundle edge Rails instead:
@@ -7,13 +7,11 @@ gem 'rails', '3.2.14'
 
 gem 'rails-api'
 
-gem 'sqlite3'
-
 gem 'devise'
-gem 'omniauth-twitter'
-gem 'omniauth-facebook'
-gem 'twitter'
 gem 'fb_graph'
+gem 'omniauth'
+
+gem 'pg'
 
 
 # To use ActiveModel has_secure_password
