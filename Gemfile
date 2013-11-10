@@ -9,7 +9,7 @@ gem 'rails-api'
 
 gem 'devise'
 gem 'fb_graph'
-gem 'omniauth'
+gem 'omniauth-facebook'
 
 gem 'pg'
 
