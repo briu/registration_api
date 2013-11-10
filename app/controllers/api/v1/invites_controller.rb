@@ -1,8 +1,8 @@
 class Api::V1::InvitesController < Api::V1::ApiController
   def invite
-    @user = User.find(params[:user][:id])
+    @user = User.find_by_authentication_token(params[:user][:auth_token])
     if @user.fb_id.present?
-      fb_user = FbGraph::User.fetch('#{@user.fb_id', :access_token => "#{@user.fb_access_token}")
+      fb_user = FbGraph::User.fetch("#{@user.fb_id}", :access_token => "#{@user.fb_access_token}")
       fb_user.friends.each do |friend|
         app_request = fb_user.app_request!(
           :message => 'Connect to my app!',

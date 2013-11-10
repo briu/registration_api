@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :first_name, :last_name
+  attr_accessible :email, :password, :first_name, :last_name, :fb_id, :fb_access_token, :twt_id, :twt_access_token
+
   has_many :authentications
 
   def ensure_authentication_token

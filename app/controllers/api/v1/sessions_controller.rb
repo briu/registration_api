@@ -6,7 +6,6 @@ class Api::V1::SessionsController < Api::V1::ApiController
     return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
-      sign_in(:user, resource)
       render json: { success: true, auth_token: resource.authentication_token }, status: :created
       return
     end
@@ -14,9 +13,9 @@ class Api::V1::SessionsController < Api::V1::ApiController
   end
 
   def destroy
-    resource = User.find_for_database_authentication(:email => params[:user][:email])
-    resource.authentication_token = nil
-    resource.save
+    @user = User.find_for_database_authentication(authentication_token: params[:user][:auth_token])
+    @user.authentication_token = nil
+    @user.save
     render :json=> {:success=>true}
   end
 
