@@ -12,13 +12,13 @@ class Api::V1::RegistrationsController < Api::V1::ApiController
         render :json=> user.errors, :status=>422
       end
     else
-      user = User.new(params[:user])
-      if user.save
-        render :json=> { :token=>user.authentication_token }, :status=>201
+      @user = User.new(params[:user])
+      if @user.save
+        render :json=> { :token=>@user.authentication_token }, :status=>201
         return
       else
         warden.custom_failure!
-        render :json=> user.errors, :status=>422
+        render :json=> @user.errors, :status=>422
       end
     end
   end

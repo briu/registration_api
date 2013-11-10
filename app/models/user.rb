@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   before_save :ensure_authentication_token
-  after_save :take_friends
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 

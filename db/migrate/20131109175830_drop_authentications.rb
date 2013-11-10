@@ -4,5 +4,6 @@ class DropAuthentications < ActiveRecord::Migration
   end
 
   def down
+  	create_table :authentications
   end
 end
