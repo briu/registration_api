@@ -9,7 +9,7 @@ class Api::V1::RegistrationsController < Api::V1::ApiController
         render json: { success: true, auth_token: @user.authentication_token }, status: :created
       else
         warden.custom_failure!
-        render :json=> user.errors, :status=>422
+        render :json=> @user.errors, :status=>422
       end
     else
       @user = User.new(params[:user])
